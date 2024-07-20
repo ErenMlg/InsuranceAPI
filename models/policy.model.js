@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const PolicySchema = mongoose.Schema({
     policyNo : { type: String, unique: true, primaryKey: true, required: true, MinKey:8, MaxKey:8 },
-    customerNo : { type: String, required: true },
+    customerNo : { type: String, ref: 'Customer', required: true, unique: true, foreignKey: true, MinKey:11, MaxKey:11 },
     policyStatus : { type: Boolean, required: true },
     policyTypeCode : { type: String, required: true, MaxKey: 1 },
     policyPrim : { type: Number, required: true },
