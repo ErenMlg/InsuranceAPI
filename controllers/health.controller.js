@@ -4,7 +4,7 @@ const Policy = require('../models/policy.model.js');
 const getHealth = async (req, res) => {
     try {
         const health = await Health.find({});
-        res.status(200).json(health);
+        res.status(200).json({count: health.length, data: health});
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

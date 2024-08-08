@@ -5,7 +5,7 @@ const getPaymentWithPolicy = async (req, res) => {
     try {
         const policyNo = req.params.policyNo;
         const payments = await Payment.find({ policyNo: policyNo });
-        res.status(200).json(payments);
+        res.status(200).json({count: payments.length, data: payments});
     }
     catch (err) {
         res.status(500).json({ message: err.message });

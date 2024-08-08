@@ -4,7 +4,7 @@ const Policy = require('../models/policy.model.js');
 const getDask = async (req, res) => {
     try {
         const dask = await Dask.find({});
-        res.status(200).json(dask);
+        res.status(200).json({count: dask.length, data: dask});
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

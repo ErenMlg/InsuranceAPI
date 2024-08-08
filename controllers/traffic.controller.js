@@ -3,8 +3,8 @@ const Policy = require('../models/policy.model.js');
 
 const getCars = async (req, res) => {
     try {
-        const cars = await Traffic.find({});
-        res.status(200).json(cars);
+        const traffic = await Traffic.find({});
+        res.status(200).json(traffic);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -13,8 +13,8 @@ const getCars = async (req, res) => {
 const getCarsWithID = async (req, res) => {
     try {
         const id = req.params.id;
-        const cars = await Traffic.find({ carMotorNo: id });
-        res.status(200).json(cars);
+        const traffic = await Traffic.find({ carMotorNo: id });
+        res.status(200).json(traffic);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -26,12 +26,12 @@ const updateCar = async (req, res) => {
         const policyNo = req.body.policyNo;
         const policy = await Policy.findOne({ policyNo: policyNo });
         if (policy) {
-            const car = await Traffic.findOneAndUpdate({ carMotor: id }, req.body);
-            if (!car) {
+            const traffic = await Traffic.findOneAndUpdate({ carMotor: id }, req.body);
+            if (!traffic) {
                 return res.status(404).json({ message: "Car not found" });
             } else {
-                const updatedCar = await Traffic.find({ carMotor: id });
-                return res.status(200).json(updatedCar);
+                const updatedTraffic = await Traffic.find({ carMotor: id });
+                return res.status(200).json(updatedTraffic);
             }
         } else {
             return res.status(404).json({ message: "Wrong Policy No" });
@@ -45,8 +45,8 @@ const updateCar = async (req, res) => {
 const deleteCar = async (req, res) => {
     try {
         const id = req.params.id;
-        const car = await Traffic.findOneAndDelete({ carMotor: id }, req.body);
-        if (!car) {
+        const traffic = await Traffic.findOneAndDelete({ carMotor: id }, req.body);
+        if (!traffic) {
             return res.status(404).json({ message: "Car not found" });
         }
         else {
@@ -65,13 +65,14 @@ const postCar = async (req, res) => {
         if (!policy) {
             return res.status(404).json({ message: "Wrong Policy No" });
         }
-        const existCar = await Traffic.findOne({ policyNo: policyNo });
-        if (existCar) {
+        const existTraffic = await Traffic.findOne({ policyNo: policyNo });
+        if (existTraffic) {
             await Traffic.updateOne({ policyNo: policyNo }, req.body);
-            return res.status(200).json(existCar);
+            return res.status(200).json(existTraffic);
         }
-        const car = await Traffic.create(req.body);
-        res.status(200).json(car);
+        const traffic = await Traffic.create(req.body);
+        console.log(traffic);
+        res.status(200).json(traffic);
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: err.message });

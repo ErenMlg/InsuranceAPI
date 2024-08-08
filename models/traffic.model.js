@@ -12,5 +12,5 @@ const TrafficSchema = mongoose.Schema({
     carChassisNo: { type: String, required: true },
 },{ versionKey: false });
 
-const Traffic = mongoose.model('Car', TrafficSchema);
+const Traffic = mongoose.model('Traffic', TrafficSchema);
 module.exports = Traffic;

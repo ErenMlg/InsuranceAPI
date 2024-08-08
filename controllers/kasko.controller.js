@@ -4,7 +4,7 @@ const Policy = require('../models/policy.model.js');
 const getCars = async (req, res) => {
     try {
         const cars = await Kasko.find({});
-        res.status(200).json(cars);
+        res.status(200).json({count: cars.length, data: cars});
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
