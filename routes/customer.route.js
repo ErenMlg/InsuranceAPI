@@ -4,6 +4,8 @@ const customerController = require('../controllers/customer.controller.js');
 
 router.get('/', customerController.getCustomer);
 
+router.get('/:key?/:customerID?', customerController.getCustomerByIDByName);
+
 router.put('/:customerID', customerController.updateCustomerByNo);
 
 router.delete('/:customerID', customerController.deleteCustomerByNo);
