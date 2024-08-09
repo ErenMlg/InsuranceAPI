@@ -1,11 +1,12 @@
 
 const Policy = require('../models/policy.model.js');
 const Customer = require('../models/customer.model.js');
+const { options } = require('../routes/policy.route.js');
 
 const getPolicy = async (req, res) => {
     try {
         const products = await Policy.find({});
-        res.status(200).json( {count: products.length, data: products} );
+        res.status(200).json({ count: products.length, data: products });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -21,11 +22,51 @@ const getPoliciesWithAgent = async (req, res) => {
     }
 }
 
+const getPolicyByTypeByCustomer = async (req, res) => {
+    try {
+        const { type, id } = req.params;
+        console.log('Received params:', { type, id });
+        let query = {
+            $or: []
+        };
+
+        if (id) {
+            query.$or.push({ customerNo: { $regex: id, $options: 'i' } });
+        }
+
+        if (!id) {
+            query.$or.push({ customerNo: { $regex: type, $options: 'i' } });
+        }
+        
+        if (type) {
+            if(type !='0'){
+            query.$or.push({policyTypeCode: parseInt(type) });  
+            console.log("Sa")
+            }        
+        }
+
+        if (!id && !type) {
+            query = {};
+        }
+
+        console.log('Constructed query:', query);
+
+        const policy = await Policy.find(query);
+        res.status(200).json({ count: policy.length, data: policy });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
 const getPoliciesWithCustomer = async (req, res) => {
     try {
         const customerNo = req.params.customerNo;
-        const policies = await Policy.find({ customerNo: customerNo });
-        res.status(200).json(policies);
+        if (customerNo==="0") {
+            const policies = await Policy.find({});
+            return res.status(200).json({ count: policies.length, data: policies });
+        }
+        const policies = await Policy.find({ customerNo: { $regex: customerNo, $options:"i" } });
+        res.status(200).json({ count: policies.length, data: policies });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -88,18 +129,18 @@ const savePolicy = async (req, res) => {
         const existingPolicy = await Policy.findOne({
             customerNo: req.body.customerNo,
             policyTypeCode: req.body.policyTypeCode,
-            $or : [ 
+            $or: [
                 {
-                    policyStatus : "P",
+                    policyStatus: "P",
                     policyEndDate: { $gte: req.body.policyEnterDate }
                 },
                 {
-                    policyStatus : "T",
+                    policyStatus: "T",
                     policyEnterDate: { $lte: req.body.policyEnterDate }
                 }
             ],
         });
-        
+
         if (existingPolicy) {
             req.body.policyNo = existingPolicy.policyNo;
             if (existingPolicy.policyStatus === "T") {
@@ -108,9 +149,9 @@ const savePolicy = async (req, res) => {
                 const x = await Policy.findOne({ policyNo: req.body.policyNo });
                 return res.status(200).json(x);
             } else {
-                return res.status(409).json({ 
+                return res.status(409).json({
                     message: "Customer already has a policy with an active entry date within the specified period"
-                 });
+                });
             }
         }
 
@@ -128,18 +169,19 @@ const savePolicy = async (req, res) => {
 const generateUniqueId = async function () {
     let id;
     let exists = true;
-  
+
     while (exists) {
-      id = Math.floor(10000000 + Math.random() * 90000000).toString();
-      exists = await Policy.findOne({ policyNo: id });
+        id = Math.floor(10000000 + Math.random() * 90000000).toString();
+        exists = await Policy.findOne({ policyNo: id });
     }
-  
+
     return id;
-  };
+};
 
 module.exports = {
     getPolicy,
     updatePolicyByNo,
+    getPolicyByTypeByCustomer,
     deletePolicyByNo,
     savePolicy,
     getPolicyWithNo,

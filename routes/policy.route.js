@@ -8,6 +8,8 @@ router.get('/policyNo=:policyNo', policyController.getPolicyWithNo);
 router.get('/agentNo=:agentNo', policyController.getPoliciesWithAgent);
 router.get('/customerNo=:customerNo', policyController.getPoliciesWithCustomer);
 
+router.get('/:type?/:id?', policyController.getPolicyByTypeByCustomer);
+
 router.put('/:policyNo', policyController.updatePolicyByNo);
 
 router.delete('/:policyNo', policyController.deletePolicyByNo);
