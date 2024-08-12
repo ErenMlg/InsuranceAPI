@@ -1,6 +1,16 @@
 const Payment = require('../models/payment.model');
 const Policy = require('../models/policy.model');
 
+const getPayments = async (req, res) => {
+    try {
+        const payments = await Payment.find();
+        res.status(200).json({count: payments.length, data: payments});
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
 const getPaymentWithPolicy = async (req, res) => {
     try {
         const policyNo = req.params.policyNo;
@@ -8,6 +18,16 @@ const getPaymentWithPolicy = async (req, res) => {
         res.status(200).json({count: payments.length, data: payments});
     }
     catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
+const deletePayment = async (req, res) => {
+    try {
+        const paymentNo = req.params.paymentNo;
+        const payment = await Payment.findOneAndDelete({ policyNo: paymentNo });
+        res.status(200).json(payment);
+    } catch (err) {
         res.status(500).json({ message: err.message });
     }
 }
@@ -31,6 +51,8 @@ const createPayment = async (req, res) => {
 }
 
 module.exports = {
+    deletePayment,
+    getPayments,
     getPaymentWithPolicy,
     createPayment
 }

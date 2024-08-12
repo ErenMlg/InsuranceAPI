@@ -1,7 +1,11 @@
 
 const Policy = require('../models/policy.model.js');
 const Customer = require('../models/customer.model.js');
-const { options } = require('../routes/policy.route.js');
+const Payment = require('../models/payment.model.js');
+const Kasko = require('../models/kasko.model.js');
+const Traffic = require('../models/traffic.model.js');
+const Health = require('../models/health.model.js');
+const Dask = require('../models/dask.model.js');
 
 const getPolicy = async (req, res) => {
     try {
@@ -75,8 +79,7 @@ const getPoliciesWithCustomer = async (req, res) => {
 const getPolicyWithNo = async (req, res) => {
     try {
         const policyNo = req.params.policyNo;
-        const policies = await Policy.find({ policyNo: policyNo });
-
+        const policies = await Policy.findOne({ policyNo: policyNo });
         res.status(200).json(policies);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -109,6 +112,10 @@ const deletePolicyByNo = async (req, res) => {
         if (!policy) {
             return res.status(404).json({ message: "Policy not found" });
         } else {
+            const models = [Kasko, Traffic, Health, Dask, Payment];
+                for (const model of models) {
+                  await model.deleteMany({ policyNo: policyNo });
+                }
             return res.status(200).json("Policy Deleted Successfully");
         }
     } catch (err) {
@@ -186,5 +193,5 @@ module.exports = {
     savePolicy,
     getPolicyWithNo,
     getPoliciesWithAgent,
-    getPoliciesWithCustomer
+    getPoliciesWithCustomer,
 }

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const PaymentSchema = mongoose.Schema({
     policyNo: { type: String, ref:'Policy', required: true, unique: true, foreignKey: true,  MinKey:8, MaxKey:8},
     paymentAmount: { type: Number, required: true },
-    paymentDate: { type: Date, required: true },
+    paymentDate: { type: String, required: true },
     creditCardNumber: { type: String, required: true },
     creditCardDate: { type: Date, required: true },
     creditCardName: { type: String, required: true },
