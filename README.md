@@ -1,6 +1,11 @@
 # Insurance API
  A insurance api for use my <a href="https://github.com/ErenMlg/InsuranceApp">Insuranca App</a> project.
 
+ <p align="center">
+<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-red.svg"></a>
+<a href="https://github.com/ErenMlg"><img src="https://img.shields.io/badge/github-ErenMlg-blue"></a>
+</p>
+
 ## Project Tech Stack
 <ul>
  <li>This project developed with %100 with Node.JS</li>
