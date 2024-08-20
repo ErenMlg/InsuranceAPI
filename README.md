@@ -1,0 +1,263 @@
+# Insurance API
+ A insurance api for use my <a href="https://github.com/ErenMlg/InsuranceApp">Insuranca App</a> project.
+
+## Project Tech Stack
+<ul>
+ <li>This project developed with %100 with Node.JS</li>
+ <li>Used MongoDB as database</li>
+</ul>
+
+## Api Structure
+<table>
+  <tr>
+    <td>
+      <table>
+  <tr>
+    <td colspan=2 align="center">Customer</td>
+  </tr>
+  <tr>
+    <td>Field Name</td>
+    <td>Type</td>
+  </tr>
+  <tr>
+    <td>customerID</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>customerName</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>customerSurname</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>customerBirthdate</td>
+    <td>Date</td>
+  </tr>
+  <tr>
+    <td>customerEmail</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>customerPhone</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>customerProvince</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>customerDistrict</td>
+    <td>String</td>
+  </tr>
+</table>
+    </td>
+  <td>
+      <table>
+  <tr>
+    <td colspan=2 align="center">DASK</td>
+  </tr>
+  <tr>
+    <td>Field Name</td>
+    <td>Type</td>
+  </tr>
+  <tr>
+    <td>policyNo</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>uavt</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>apartmentMeter</td>
+    <td>Number</td>
+  </tr>
+  <tr>
+    <td>apartmentFloor</td>
+    <td>Number</td>
+  </tr>
+  <tr>
+    <td>apartmentAge</td>
+    <td>Number</td>
+  </tr>
+  <tr>
+    <td>structType</td>
+    <td>String</td>
+  </tr>
+</table>
+    </td>
+
+  <td>
+      <table>
+  <tr>
+    <td colspan=2 align="center">Health</td>
+  </tr>
+  <tr>
+    <td>Field Name</td>
+    <td>Type</td>
+  </tr>
+  <tr>
+    <td>policyNo</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>smoke</td>
+    <td>Boolean</td>
+  </tr>
+  <tr>
+    <td>alcohol</td>
+    <td>Boolean</td>
+  </tr>
+  <tr>
+    <td>drugs</td>
+    <td>Boolean</td>
+  </tr>
+  <tr>
+    <td>sport</td>
+    <td>Boolean</td>
+  </tr>
+  <tr>
+    <td>surgery</td>
+    <td>Boolean</td>
+  </tr>
+  <tr>
+    <td>allergy</td>
+    <td>Boolean</td>
+  </tr>
+  
+</table>
+    </td>
+  </tr>
+  <tr>
+      <td>
+      <table>
+  <tr>
+    <td colspan=2 align="center">Kasko - Traffic</td>
+  </tr>
+  <tr>
+    <td>Field Name</td>
+    <td>Type</td>
+  </tr>
+  <tr>
+    <td>policyNo</td>
+    <td>ObjectID</td>
+  </tr>
+  <tr>
+    <td>plateProvinceCode</td>
+    <td>Number</td>
+  </tr>
+  <tr>
+    <td>plateCode</td>
+    <td>String</td>
+  </tr>
+    <tr>
+    <td>carModel</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>carModelYear</td>
+    <td>Number</td>
+  </tr>
+    <tr>
+    <td>carMotorNo</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>carChassisNo</td>
+    <td>String</td>
+  </tr>
+</table>
+    </td>
+    <td>
+      <table>
+  <tr>
+    <td colspan=2 align="center">Payment</td>
+  </tr>
+  <tr>
+    <td>Field Name</td>
+    <td>Type</td>
+  </tr>
+  <tr>
+    <td>policyNo</td>
+    <td>ObjectID</td>
+  </tr>
+  <tr>
+    <td>paymentAmount</td>
+    <td>Number</td>
+  </tr>
+  <tr>
+    <td>paymentDate</td>
+    <td>Date</td>
+  </tr>
+  <tr>
+    <td>creditCardNumber</td>
+    <td>String</td>
+  </tr>
+    <tr>
+    <td>creditCardDate</td>
+    <td>Date</td>
+  </tr>
+  <tr>
+    <td>creditCardName</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>creditCardCVC</td>
+    <td>String</td>
+  </tr>
+</table>
+    </td>
+     <td>
+      <table>
+  <tr>
+    <td colspan=2 align="center">Policy</td>
+  </tr>
+  <tr>
+    <td>Field Name</td>
+    <td>Type</td>
+  </tr>
+  <tr>
+    <td>policyNo</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>customerNo</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>policyStatus</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>policyTypeCode</td>
+    <td>Number</td>
+  </tr>
+  <tr>
+    <td>policyPrim</td>
+    <td>Number</td>
+  </tr>
+    <tr>
+    <td>policyAgent</td>
+    <td>String</td>
+  </tr>
+  <tr>
+    <td>policyEnterDate</td>
+    <td>Date</td>
+  </tr>
+  <tr>
+    <td>policyStartDate</td>
+    <td>Date</td>
+  </tr>
+  <tr>
+    <td>policyEndDate</td>
+    <td>Date</td>
+  </tr>
+</table>
+    </td>
+  </tr>
+</table>
+
+## End Note
+I may have mistakes, you can contact me for your feedback. 👉 📫 **eren.mollaoglu@outlook.com**<br>
